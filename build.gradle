@@ -9,10 +9,15 @@ repositories {
 
 dependencies {
     implementation 'org.apache.groovy:groovy:4.0.24'
+    testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
 }
 
 application {
     mainClass = 'Boletim'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }
 
 // Garante que acentos (média, Recuperação) apareçam corretamente
