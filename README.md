@@ -101,6 +101,24 @@ for (int i = 0; i < notas.size(); i++) {
 
 Assim, a média passou a refletir corretamente todas as notas do aluno.
 
+### Problema do segundo bug
+A regra de recuperação estava configurada com o valor errado. O código usava `6.5`, mas a escola define que a recuperação começa em `5.0`:
+
+```groovy
+final MEDIA_RECUPERACAO = 6.5
+```
+
+Com isso, alunos com média 6.0 eram classificados de forma incorreta.
+
+### Correção do segundo bug
+Foi ajustado para o valor correto da regra da escola:
+
+```groovy
+final MEDIA_RECUPERACAO = 5.0
+```
+
+A partir desse ajuste, a situação de recuperação passa a obedecer corretamente às regras estabelecidas.
+
 ### Checklist
 
 - [ ] A média de todos os alunos está igual à esperada
