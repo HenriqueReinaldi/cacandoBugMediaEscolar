@@ -77,6 +77,30 @@ primeiro acerto.
   estava errada. Se a explicação não fizer sentido para você, pergunte de
   novo.
 
+## Sobre o bug
+
+### Problema
+O cálculo da média estava ignorando a primeira nota do aluno porque o loop iniciava em `i = 1`:
+
+```groovy
+for (int i = 1; i < notas.size(); i++) {
+    soma += notas[i]
+}
+```
+
+Isso fazia com que a primeira nota nunca entrasse na soma, alterando o resultado final da média.
+
+### Correção
+Foi ajustado para começar em `i = 0`, incluindo todas as notas no cálculo:
+
+```groovy
+for (int i = 0; i < notas.size(); i++) {
+    soma += notas[i]
+}
+```
+
+Assim, a média passou a refletir corretamente todas as notas do aluno.
+
 ### Checklist
 
 - [ ] A média de todos os alunos está igual à esperada
