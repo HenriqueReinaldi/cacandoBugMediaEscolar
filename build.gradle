@@ -1,0 +1,25 @@
+plugins {
+    id 'groovy'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.24'
+}
+
+application {
+    mainClass = 'Boletim'
+}
+
+// Garante que acentos (média, Recuperação) apareçam corretamente
+tasks.withType(GroovyCompile).configureEach {
+    groovyOptions.encoding = 'UTF-8'
+}
+
+tasks.named('run') {
+    jvmArgs '-Dfile.encoding=UTF-8', '-Dstdout.encoding=UTF-8'
+}
