@@ -119,8 +119,36 @@ final MEDIA_RECUPERACAO = 5.0
 
 A partir desse ajuste, a situação de recuperação passa a obedecer corretamente às regras estabelecidas.
 
+### Problema do terceiro bug
+A função que decide a situação final usava uma comparação incorreta para aprovação. O código testava `media > mediaAprovacao`, o que excluía o caso em que a média era exatamente 7.0. Além disso, a regra da escola exige que a aprovação seja definida por `>= 7.0` e a recuperação por `>= 5.0`.
+
+```groovy
+if (media > mediaAprovacao) {
+    return "Aprovado"
+} else if (media >= mediaRecuperacao) {
+    return "Recuperação"
+}
+```
+
+Isso fazia com que notas de corte como 7.0 fossem tratadas de forma errada.
+
+### Correção do terceiro bug
+Foi ajustado para incluir o limite exato da aprovação:
+
+```groovy
+if (media >= mediaAprovacao) {
+    return "Aprovado"
+} else if (media >= mediaRecuperacao) {
+    return "Recuperação"
+} else {
+    return "Reprovado"
+}
+```
+
+Com isso, alunos com média exatamente 7.0 passam a ser corretamente classificados como Aprovados.
+
 ### Checklist
 
-- [ ] A média de todos os alunos está igual à esperada
-- [ ] A situação de todos os alunos está igual à esperada
-- [ ] Consigo explicar, com minhas palavras, cada bug que corrigi
+- [+] A média de todos os alunos está igual à esperada
+- [+] A situação de todos os alunos está igual à esperada
+- [+] Consigo explicar, com minhas palavras, cada bug que corrigi
